@@ -26,9 +26,10 @@ int main(int argc, char **argv){
     waf->stderr_hook = &errput;
     waf->stderr_args = log;
 
+    char buff[256];
     time_t t = time(NULL);
-    char *ct = ctime(&t);
-    write_log(log, ct, strlen(ct), NORMAL);
+    sprintf(buff, "\n----------\n%s----------\n", ctime(&t));
+    write_log(log, buff, strlen(buff), NORMAL);
 
     return start_stream_waf(waf, elf_name, NULL, NULL);
 }
